@@ -25,3 +25,6 @@ dist-ssr
 
 # Ignore the build folder
 **/target/*
+
+# Ignore sqlite DB file
+posts.db

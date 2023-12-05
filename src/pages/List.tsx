@@ -14,6 +14,7 @@ import {
    GridRowParams,
    GridActionsCellItem, 
    GridToolbarContainer,
+   GridToolbar,
    GridRowModesModel,
    GridRowModes
   } from '@mui/x-data-grid';
@@ -131,7 +132,7 @@ export const List = () => {
     },
   ];
   
-  function toolbar(props: any) {
+  function myToolbar() {
     const handleClick = async() => {
       await invoke("create_post", { title: 'title',  text:'lorem text' });
       await listPosts();
@@ -139,6 +140,7 @@ export const List = () => {
   
     return (
       <GridToolbarContainer>
+        <GridToolbar/>
         <Button color="primary"  onClick={handleClick}>
           Add record
         </Button>
@@ -149,7 +151,6 @@ export const List = () => {
 
   return (
     <Paper>
-      <p>{JSON.stringify(rowModesModel)}</p>
     <DataGrid
          initialState={{
           pagination: {
@@ -163,9 +164,7 @@ export const List = () => {
         rowModesModel={rowModesModel}
         onPaginationModelChange={setPaginationModel}
         pageSizeOptions={[5, 10]}
-        slots={{
-          toolbar,
-        }}
+        slots={{ toolbar: myToolbar }}
     />
     </Paper>
   );

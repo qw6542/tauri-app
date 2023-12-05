@@ -18,9 +18,9 @@ pub async fn establish_connection() -> Result<DbConn, String> {
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
-pub fn greet(name: &str) -> String {
-    println!("Received request name: {name}");
-    format!("Hello, {}! You've been greeted from Rust!", name)
+pub fn greet(msg: &str) -> String {
+    println!("Received request msg: {msg}");
+    format!("Hello, {}! You've been greeted from Rust!", msg)
 }
 
 #[tauri::command]

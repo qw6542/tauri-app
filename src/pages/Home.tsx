@@ -5,13 +5,11 @@ import "../App.css";
 
 export function Home() {
   const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [msg, setMsg] = useState("");
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    // setGreetMsg(await invoke("greet", { name }));
-    // setGreetMsg(await invoke("create_post", { title: name }));
-    setGreetMsg(await invoke("list_posts_in_page", { page: 1, pageSize: 5 }));
+    setGreetMsg(await invoke("greet", { msg }));
   }
 
   async function listPosts() {
@@ -66,8 +64,8 @@ export function Home() {
       >
         <input
           id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
+          onChange={(e) => setMsg(e.currentTarget.value)}
+          placeholder="Enter a msg..."
         />
         <button type="submit">Greet</button>
       </form>
