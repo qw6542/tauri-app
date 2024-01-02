@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import { Home, About, List } from './pages';
+import { Home, About, List, MyGrid } from './pages';
 
 const App = () => {
   return (
@@ -16,6 +16,9 @@ const App = () => {
             <li>
               <Link to="/list">List</Link>
             </li>
+            <li>
+              <Link to="/grid">Grid</Link>
+            </li>
           </ul>
         </nav>
 
@@ -24,6 +27,7 @@ const App = () => {
         <Route path="/" Component={Home} />
         <Route path="/about" Component={About} />
         <Route path="/list" Component={List} />
+        <Route path="/grid" Component={MyGrid} />
 
         </Routes>
 

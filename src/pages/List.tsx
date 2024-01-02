@@ -25,8 +25,8 @@ export const List = () => {
     pageSize: 5,
     page:0
   });
-  const [posts, setPosts] = useState([]);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
+  const [posts, setPosts] = useState([]);
 
   async function listPosts() {
     const posts:any = await invoke("list_posts_in_page", paginationModel);
@@ -37,14 +37,15 @@ export const List = () => {
      listPosts();
   }, [paginationModel]);
 
-  // const onRowEditStop = async ({row}:GridRowParams)=>{
 
-  //   await invoke("update_post", row)
-  // }
+  const processRowUpdate = async (updatedRow:any)=>{
+    await invoke("update_post", updatedRow);
+    setRowModesModel({
+      ...rowModesModel,
+      [updatedRow.id]: { mode: GridRowModes.View, ignoreModifications: true },
+    });
 
-  // const processRowUpdate = async (updatedRow:any)=>{
-  //   await invoke("update_post", updatedRow)
-  // }
+  }
 
   const handleDeleteClick = (params: GridRowParams) => async () => {
     await invoke("delete_post", { id: params.id });
@@ -55,9 +56,7 @@ export const List = () => {
     setRowModesModel({ ...rowModesModel, [params.id]: { mode: GridRowModes.Edit } });
   };
 
-  const handleSaveClick = (params: any) => async () => {
-  
-    await invoke("update_post", params.row)
+  const handleSaveClick = (params: any) => async () => {    
     setRowModesModel({
       ...rowModesModel,
       [params.id]: { mode: GridRowModes.View},
@@ -163,6 +162,7 @@ export const List = () => {
         editMode="row"
         rowModesModel={rowModesModel}
         onPaginationModelChange={setPaginationModel}
+        processRowUpdate={processRowUpdate}
         pageSizeOptions={[5, 10]}
         slots={{ toolbar: myToolbar }}
     />

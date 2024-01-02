@@ -60,7 +60,7 @@ pub async fn get_post(id: i32) -> Result<String, ()> {
 }
 
 #[tauri::command]
-pub async fn update_post(id: i32,title: String,text: String,) -> Result<String, ()> {
+pub async fn update_post(id: i32,title: String,text: String) -> Result<String, ()> {
     println!("Enter update_post api form_data: id: {id}, title: {title}, text: {text}");
     let db: sea_orm::prelude::DatabaseConnection = establish_connection().await.unwrap();
     let optional_post: Option<post::Model> = Post::find_by_id(id)
